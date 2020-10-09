@@ -1,0 +1,154 @@
+Scenario : User can access fligt ticket page
+    Given   User is on the Home page.
+    When    User click "Tiket Pesawat" menu.
+    Then    User redirected to "Tiket Pesawat" page.
+    And     "Tiket Pesawat" page rendered correctly.
+    And     There are radio buttons "Sekali Jalan" and "Pulang-Pergi".
+    And     "Sekali Jalan" radiobutton is the default.
+
+Scenario : User choose for one way trip
+    Given   User is on the "Tike Pesawat" page.
+    When    User click "Sekali Jalan" radio button.
+    Then    Datepicker in the "Pulang-Pergi" option is disabled.
+
+Scenario : User choose for round trip
+    Given   User is on the "Tike Pesawat" page.
+    When    User click "Pulang-Pergi" radio button.
+    Then    Checkbox "Pulang-Pergi" is checked automatically.
+
+Scenario : User select departure city (by clicking)
+    Given   User is on the "Tike Pesawat" page.
+    When    User click "Dari" field.
+    Then    Popular city list options displayed (Dropdown).
+    When    User click the list of city options that are displayed.
+    Then    The city or airport was selected successfully.
+    When    User click "Cari Penerbangan" button.
+    Then    User has successfully selected the departure city.
+    And     Popular city list options on "Ke" field is displayed automatically.
+    But     User doesn't select the departure city.
+    Then    Warning message "Kota asal belum diisi." is displayed.
+
+Scenario : User select departure city (by typing)
+    Given   User is on the "Tike Pesawat" page.
+    When    User types the name of city or airport in "Dari" field.
+    Then    Option list of related cities or airports displayed (Dropdown).
+    But     Option list of related cities or airports is not found.
+    Then    Confirmation message "Maaf, tidak ada hasil, Silakan coba kata kunci lain atau pilih kota atau bandara dari daftar." is displayed
+
+    When    User click the list of city options that are displayed.
+    Then    The city or airport was selected successfully.
+    When    User click "Cari Penerbangan" button.
+    Then    User has successfully selected the departure city.
+    And     Popular city list options on "Ke" field is displayed automatically.
+    But     User doesn't select the departure city.
+    Then    Warning message "Kota asal belum diisi." is displayed.
+
+Scenario : User select destination city (by clicking)
+    Given   User is on the "Tike Pesawat" page.
+    When    User click "Ke" field.
+    Then    Popular city list options displayed (Dropdown).
+    When    User click the list of city options that are displayed.
+    Then    The city or airport was selected successfully.
+    When    User click "Cari Penerbangan" button.
+    Then    User has successfully selected the destination city.
+    And     Calendars for the current and next month on "Berangkat" field is displayed automatically.
+    But     User doesn't select the departure city.
+    Then    Warning message "Kota tujuan belum diisi." is displayed.
+
+Scenario : User select destination city (by typing)
+    Given   User is on the "Tike Pesawat" page.
+    When    User types the name of city or airport in "Ke" field.
+    Then    Option list of related cities or airports displayed (Dropdown).
+    But     Option list of related cities or airports is not found.
+    Then    Confirmation message "Maaf, tidak ada hasil, Silakan coba kata kunci lain atau pilih kota atau bandara dari daftar." is displayed.
+
+    When    User click the list of city options that are displayed.
+    Then    The city or airport was selected successfully.
+    When    User click "Cari Penerbangan" button.
+    Then    User has successfully selected the destination city.
+    And     Calendars for the current and next month on "Berangkat" field is displayed automatically.
+    But     User doesn't select the departure city.
+    Then    Warning message "Kota tujuan belum diisi." is displayed.
+
+Scenario : User choose how many adult passengers and child will buy a ticket
+    Given   User is on the "Tiket Pesawat" page
+    And     "1 Penumpang, Ekonomi" is the default on the "Penumpang & Kelas Kabin" field.
+    When    User click "Penumpang & Kelas Kabin" field
+    Then    "Penumpang" and "Kelas Kabin" forms are displayed.
+    When    User click "+" symbol in the "Dewasa" or "Anak" column.
+    Then    The number of adult or child passengers increases.
+    When    User click "-" symbol in the "Dewasa" or "anak" column.
+    Then    The number of adult or child passengers is reduced.
+    But     The total adult passenger must not be less than 1.
+    When    User click "Selesai" button
+    Then    Total passengers were successfully selected
+    And     "Penumpang" and "Kelas Kabin" forms are closed.
+
+Scenario : User change the date (One Way Trip)
+    Given   User is on the "Tiket Pesawat" page.
+    And     "<Today>" is the default on the Departure date.
+    When    User click "Berangkat" field.
+    Then    Calendars for the current and next month are displayed.
+    And     User can choose a date departure.
+    But     User cannot select a departure on a date that has passed.
+    When    User click to select date departure.
+    Then    The departure date was selected successfully.
+    And     "Penumpang" and "Kelas Kabin" forms is displayed automatically.
+
+
+Scenario : User choose an airline (One Way Trip)
+    Given   User is on the "Tiket Pesawat" page
+    And     User has selected a city in the "Dari" and "Ke" fields.
+    But     User has not selected a city in the "Dari" and "Ke" fields.
+    Then    Messages "Kota asal belum diisi." and "Kota tujuan belum diisi." is displayed when user click "Cari Penerbangan" button.
+    When    User click "Cari Penerbangan" button.
+    Then    User redirected to "Pilih Penerbangan Pergi" page.
+    And     List of the best flights and the best prices is displayed.
+    And     Flight listing order by lowest price and earliest departure is the default.
+    When    User clicks the "Pilih" button on the selected flight
+    Then    Airlines were successfully selected
+    And     User redirected to "Detail Pemesanan" page.
+
+
+Scenario : User buy an extra baggage
+    Given   Airlines were successfully selected
+    And     User is on the "Detail Pemesanan" page.
+    And     The "Fasilitas Ekstra" section should be visible on the "Detail Pemesanan" page.
+    And     The "Bagasi" option should be visible on the "Fasilitas Ekstra" Menu.
+    When    User click "Pesan" button on the "Bagasi" option.
+    Then    Baggage detail form is displayed.
+    And     The drop down menu of baggage capacity and fees charged should be visible.
+    When    User click the list of baggage capacity
+    Then    Baggage capacity successfully selected.
+    When    User click "Simpan" button.
+    Then    User has successfully added extra baggage.
+    And     User redirected to "Detail Pemesanan" page.
+    And     The charge for extra baggage will be added to the total payment.
+
+Scenario : User use an insurance for their flight
+    Given   User is on the "Detail Pemesanan" page.
+    When    User click on the "Ya, <IDR>/Penumpang" Checkbox.
+    Then    User has successfully used insurance for his flight.
+    And     Insurance payment is added to the total payment.
+
+Scenario : User choose Virtual Account BCA as their payment method.
+    Given   User is on the "Metode Pembayaran" page.
+    When    User click "BCA Virtual Account" on the "Virtual Account" section.
+    Then    User redirected to "BCA Virtual Account" detail page.
+    When    User click "Lanjutkan" button on the "BCA Virtual Account" detail page.
+    Then    User redirected to "Detail Payment" page.
+    And     The virtual account number should be visible on "Detail Payment" page.
+    And     The total payment should be visible on "Detail Payment" page..
+    And     Users receive an email with the subject: "[tiket.com] Selesaikan Pemesanan Anda - Order ID #[number]"
+    And     User has successfully selected "BCA virtual Account" as the payment method
+
+
+Scenario : User choose Alfamart as their payment method.
+    Given   User must login using a registered account.
+    But     User is not logged in.
+    Then    Payment Feature via "Indomaret" is Disabled.
+
+Scenario : User choose Transfer Bank as their payment method.
+    Given   User must login using a registered account.
+    But     User is not logged in.
+    Then    Payment Feature via "Transfer bank" is Disabled.
